@@ -1,17 +1,19 @@
 ---
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh';
+import 'dayjs/locale/en';
+
 interface Props {
 	date: Date;
+	locale?: string;
 }
 
-const { date } = Astro.props;
+const { date, locale = 'en' } = Astro.props;
+
+// 设置dayjs语言环境
+dayjs.locale(locale);
 ---
 
 <time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+	{dayjs(date).format('MMMM DD, YYYY')}
 </time>

@@ -1,0 +1,98 @@
+---
+interface Props {
+  currentPage: number;
+  totalPosts: number;
+  postsPerPage: number;
+  baseUrl: string;
+}
+
+const { currentPage, totalPosts, postsPerPage, baseUrl } = Astro.props;
+const totalPages = Math.ceil(totalPosts / postsPerPage);
+const hasPrevious = currentPage > 1;
+const hasNext = currentPage < totalPages;
+
+const getPageNumbers = () => {
+  const pages = [];
+  const maxVisiblePages = 5;
+  
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+  
+  if (endPage - startPage + 1 < maxVisiblePages) {
+    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+  }
+  
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+  
+  return pages;
+}
+---
+
+<nav class="pagination" role="navigation" aria-label="Pagination">
+  {hasPrevious && (
+    <a href={`${baseUrl}${currentPage - 1}`} class="pagination-link pagination-prev" title="Previous page">
+      ← Previous
+    </a>
+  )}
+  
+  <div class="pagination-numbers">
+    {getPageNumbers().map(page => (
+      <a 
+        href={`${baseUrl}${page}`}
+        class={`pagination-link ${page === currentPage ? 'pagination-active' : ''}`}
+        aria-current={page === currentPage ? 'page' : undefined}
+      >
+        {page}
+      </a>
+    ))}
+  </div>
+  
+  {hasNext && (
+    <a href={`${baseUrl}${currentPage + 1}`} class="pagination-link pagination-next" title="Next page">
+      Next →
+    </a>
+  )}
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+  
+  .pagination-numbers {
+    display: flex;
+    gap: 0.25rem;
+  }
+  
+  .pagination-link {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--font-color-blue);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--font-color-blue);
+    transition: all 0.2s ease;
+  }
+  
+  .pagination-link:hover {
+    background-color: var(--font-color-blue);
+    color: white;
+    transform: translateY(-1px);
+  }
+  
+  .pagination-active {
+    background-color: var(--font-color-blue);
+    color: white;
+  }
+  
+  .pagination-prev,
+  .pagination-next {
+    font-weight: 600;
+  }
+</style>

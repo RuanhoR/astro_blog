@@ -16,6 +16,13 @@
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.3",
-    "sharp": "^0.34.3"
+    "dayjs": "^1.11.20",
+    "en": "link:dayjs/locale/en",
+    "sharp": "^0.34.3",
+    "zh": "link:dayjs/locale/zh"
+  },
+  "devDependencies": {
+    "@astrojs/vue": "^6.0.1",
+    "vue": "^3.5.32"
   }
 }
