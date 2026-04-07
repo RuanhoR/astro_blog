@@ -1,14 +1,43 @@
 ---
-import { getTranslation } from "../i18n";
-
-const today = new Date();
 ---
 
 <footer>
 	<div>
-		<div class="tip" set:html={getTranslation("footerMdTip")}></div>
+		<div class="tip" id="footerTip"></div>
 	</div>
 </footer>
+<script>
+// 动态更新页脚内容的函数
+function updateFooterContent() {
+  const footerTip = document.getElementById('footerTip');
+  if (!footerTip) return;
+  
+  // 检测当前语言
+  const getCurrentLanguage = () => {
+    const browserLang = navigator.language || navigator.languages[0] || 'zh';
+    return browserLang.startsWith('zh') ? 'zh' : 'en';
+  };
+  
+  const lang = getCurrentLanguage();
+  const currentYear = new Date().getFullYear();
+  
+  // 根据语言设置内容
+  const translations = {
+    footerMdTip: {
+      zh: `本站由 Astro 驱动，© ${currentYear}。所有的文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议进行许可。`,
+      en: `Powered by Astro, © ${currentYear}. All articles, unless otherwise stated, are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.`
+    }
+  };
+  
+  footerTip.innerHTML = translations.footerMdTip[lang];
+}
+
+// 页面加载时更新
+document.addEventListener('DOMContentLoaded', updateFooterContent);
+
+// 监听语言切换事件
+window.addEventListener('languagechange', updateFooterContent);
+</script>
 <style>
 	footer {
 		color: rgb(var(--gray--value));

@@ -1,5 +1,4 @@
 ---
-import { getTranslation } from '../i18n';
 import Layout from '../layouts/BlogPost.astro';
 ---
 
@@ -8,10 +7,43 @@ import Layout from '../layouts/BlogPost.astro';
 	description="Lorem ipsum dolor sit amet"
 	pubDate={new Date('August 08 2021')}
 >
-	<div>
-		{getTranslation("aboutTitle")}
-	</div>
-	<div>
-		{getTranslation("aboutContent")}
-	</div>
+	<div id="aboutTitle"></div>
+	<div id="aboutContent"></div>
+	
+	<script>
+	// 动态更新关于页面内容的函数
+	function updateAboutContent() {
+		const titleElem = document.getElementById('aboutTitle');
+		const contentElem = document.getElementById('aboutContent');
+		
+		if (!titleElem || !contentElem) return;
+		
+		// 检测当前语言
+		const getCurrentLanguage = () => {
+			const browserLang = navigator.language || navigator.languages[0] || 'zh';
+			return browserLang.startsWith('zh') ? 'zh' : 'en';
+		};
+		
+		const lang = getCurrentLanguage();
+		const translations = {
+			aboutTitle: {
+				zh: '关于我',
+				en: 'About Me'
+			},
+			aboutContent: {
+				zh: '这是我的博客，欢迎来到我的个人空间。我在这里分享技术文章、生活感悟和学习笔记。感谢你的访问！',
+				en: 'This is my blog, welcome to my personal space. I share technical articles, life insights, and study notes here. Thank you for visiting!'
+			}
+		};
+		
+		titleElem.textContent = translations.aboutTitle[lang];
+		contentElem.textContent = translations.aboutContent[lang];
+	}
+	
+	// 页面加载时更新
+	document.addEventListener('DOMContentLoaded', updateAboutContent);
+	
+	// 监听语言切换事件
+	window.addEventListener('languagechange', updateAboutContent);
+	</script>
 </Layout>

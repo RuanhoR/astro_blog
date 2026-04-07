@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import { SITE_TITLE } from '../consts';
-import HeaderLink from './HeaderLink.astro';
 import Search from "./Search.vue"
+import MobileSearch from "./MobileSearch.vue"
 import { currentLanguage, getTranslation } from '../i18n/index';
 ---
 
@@ -10,17 +10,53 @@ import { currentLanguage, getTranslation } from '../i18n/index';
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">{getTranslation("Home", currentLanguage)}</HeaderLink>
-			<HeaderLink href="/blog">{getTranslation("Blog", currentLanguage)}</HeaderLink>
-			<HeaderLink href="/about">{getTranslation("About", currentLanguage)}</HeaderLink>
+			<a href="/" data-link="home">{getTranslation("Home", currentLanguage)}</a>
+			<a href="/blog" data-link="blog">{getTranslation("Blog", currentLanguage)}</a>
+			<a href="/about" data-link="about">{getTranslation("About", currentLanguage)}</a>
 		</div>
 		<div class="social-links">
 			<div class="search-container">
 				<Search client:load posts={await getCollection("blog")}/>
 			</div>
 		</div>
+		<div class="mobile-search-container">
+				<MobileSearch client:load posts={await getCollection("blog")}/>
+		</div>
 	</nav>
 </header>
+<script>
+// 动态更新链接文本的函数
+function updateLinkText() {
+  const links = document.querySelectorAll('.internal-links a');
+  const translations = {
+    home: { zh: '首页', en: 'Home' },
+    blog: { zh: '博客', en: 'Blog' },
+    about: { zh: '关于', en: 'About' }
+  };
+  
+  // 检测当前语言
+  const getCurrentLanguage = () => {
+    const browserLang = navigator.language || navigator.languages[0] || 'zh';
+    return browserLang.startsWith('zh') ? 'zh' : 'en';
+  };
+  
+  const lang = getCurrentLanguage();
+  
+  links.forEach(link => {
+    const linkType = link.getAttribute('data-link');
+    // 使用类型安全的访问方式
+    if (linkType && (linkType === 'home' || linkType === 'blog' || linkType === 'about')) {
+      link.textContent = translations[linkType][lang];
+    }
+  });
+}
+
+// 页面加载时更新
+document.addEventListener('DOMContentLoaded', updateLinkText);
+
+// 监听可能的语言切换事件
+window.addEventListener('languagechange', updateLinkText);
+</script>
 <style>
 	header {
 		margin: 0;
@@ -78,9 +114,29 @@ import { currentLanguage, getTranslation } from '../i18n/index';
 		opacity: 1;
 		background: var(--card-hover-bg);
 	}
+	.mobile-search-container {
+		display: none;
+	}
+
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
+		}
+		.mobile-search-container {
+			display: block;
+		}
+		.internal-links {
+			flex: 1;
+			justify-content: center;
+			margin: 0 10px;
+		}
+		.internal-links a {
+			margin: 0 5px;
+			font-size: 0.9rem;
+		}
+		h2 {
+			font-size: 0.9rem;
+			min-width: 80px;
 		}
 	}
 </style>

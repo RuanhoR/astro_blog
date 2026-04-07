@@ -5,7 +5,6 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import Pagination from '../components/Pagination.astro';
 import { SITE_DESCRIPTION, SITE_ICON, SITE_TITLE } from '../consts';
-import { getTranslation, currentLanguage } from '../i18n';
 import BlogList from '../components/BlogList.astro';
 
 const postsPerPage = 5;
@@ -33,8 +32,8 @@ const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 						<img class="image" src={SITE_ICON}></img>
 						<div>ruanhor</div>
 					</div>
-					<div>{getTranslation("AllTextCout") + ": " + allData.textCout}</div>
-					<div>{getTranslation("AllAlircleCout") + ": " + allData.arliceCout}</div>
+					<div id="textCountDisplay"></div>
+					<div id="articleCountDisplay"></div>
 				</div>
 				<div class="posts-container">
 					<BlogList 
@@ -57,6 +56,39 @@ const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 			</div>
 		</main>
 		<Footer />
+		<script>
+		// 动态更新统计信息的函数
+		function updateStatistics() {
+			const textCountElem = document.getElementById('textCountDisplay');
+			const articleCountElem = document.getElementById('articleCountDisplay');
+			
+			if (!textCountElem || !articleCountElem) return;
+			
+			// 检测当前语言
+			const getCurrentLanguage = () => {
+				const browserLang = navigator.language || navigator.languages[0] || 'zh';
+				return browserLang.startsWith('zh') ? 'zh' : 'en';
+			};
+			
+			const lang = getCurrentLanguage();
+			const translations = {
+				AllTextCout: { zh: '总字数', en: 'Total text count' },
+				AllAlircleCout: { zh: '总文章数', en: 'Total articles' }
+			};
+			
+			const textCountData = translations.AllTextCout[lang] + ": " + {textCout: allData.textCout}.textCout;
+			const articleCountData = translations.AllAlircleCout[lang] + ": " + {arliceCout: allData.arliceCout}.arliceCout;
+			
+			textCountElem.textContent = textCountData;
+			articleCountElem.textContent = articleCountData;
+		}
+		
+		// 页面加载时更新
+		document.addEventListener('DOMContentLoaded', updateStatistics);
+		
+		// 监听语言切换事件
+		window.addEventListener('languagechange', updateStatistics);
+		</script>
 		</body>
 </html>
 <style>
