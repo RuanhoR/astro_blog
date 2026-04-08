@@ -3,9 +3,9 @@
     <div class="search-btn-wrapper" @click="openSearch">
       <div
         class="search-btn"
-        :title="getTranslation('Search', currentLanguage)"
+        :title="getTranslation('Search', getCurrentLanguage())"
       >
-        {{ getTranslation('Search', currentLanguage) }}
+        {{ getTranslation('Search', getCurrentLanguage()) }}
       </div>
     </div>
 
@@ -42,7 +42,9 @@
               <p class="result-excerpt">
                 {{
                   post.data.description ||
-                  (currentLanguage === 'zh' ? '暂无描述' : 'No description')
+                  (getCurrentLanguage() === 'zh'
+                    ? '暂无描述'
+                    : 'No description')
                 }}
               </p>
             </div>
@@ -63,7 +65,7 @@
 <script setup lang="ts">
 import type { getCollection } from 'astro:content'
 import { ref, nextTick } from 'vue'
-import { getTranslation, currentLanguage } from '../i18n/index'
+import { getTranslation, getCurrentLanguage } from '../i18n/index'
 const isSearching = ref<boolean>(false)
 const searchTerm = ref<string>('')
 const searchResults = ref<any[]>([])
@@ -73,22 +75,18 @@ const props = defineProps<{
   posts: Awaited<ReturnType<typeof getCollection>>
 }>()
 const posts = props.posts
-// i18n函数
+
+// i18n函数 - 使用响应式的当前语言
 type I18nKey =
   | 'searchTitle'
   | 'searchPlaceholder'
   | 'searchHint'
   | 'noResults'
   | 'searching'
+
 function t(key: I18nKey): string {
-  const translations = {
-    searchTitle: getTranslation('searchTitle', currentLanguage),
-    searchPlaceholder: getTranslation('searchPlaceholder', currentLanguage),
-    searchHint: getTranslation('searchHint', currentLanguage),
-    noResults: getTranslation('noResults', currentLanguage),
-    searching: getTranslation('searching', currentLanguage),
-  }
-  return translations[key]
+  const currentLang = getCurrentLanguage()
+  return getTranslation(key, currentLang)
 }
 
 function openSearch() {

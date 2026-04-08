@@ -1,16 +1,32 @@
 <template>
   <div class="mobile-search">
-    <button 
+    <button
       class="mobile-search-btn"
       @click="toggleSearch"
       :title="t('Search')"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
       </svg>
     </button>
 
-    <div v-if="isSearching" class="mobile-search-modal-overlay" @click="closeSearch">
+    <div
+      v-if="isSearching"
+      class="mobile-search-modal-overlay"
+      @click="closeSearch"
+    >
       <div class="mobile-search-modal" @click.stop>
         <div class="mobile-search-header">
           <h3>{{ t('searchTitle') }}</h3>
@@ -43,7 +59,9 @@
               <p class="mobile-result-excerpt">
                 {{
                   post.data.description ||
-                  (currentLanguage === 'zh' ? '暂无描述' : 'No description')
+                  (getCurrentLanguage() === 'zh'
+                    ? '暂无描述'
+                    : 'No description')
                 }}
               </p>
             </div>
@@ -64,7 +82,7 @@
 <script setup lang="ts">
 import type { getCollection } from 'astro:content'
 import { ref, nextTick, onMounted, onUnmounted } from 'vue'
-import { getTranslation, currentLanguage } from '../i18n/index'
+import { getTranslation, getCurrentLanguage } from '../i18n/index'
 
 const isSearching = ref<boolean>(false)
 const searchTerm = ref<string>('')
@@ -87,7 +105,8 @@ type I18nKey =
   | 'searching'
 
 function t(key: I18nKey): string {
-  return getTranslation(key, currentLanguage)
+  const currentLang = getCurrentLanguage()
+  return getTranslation(key, currentLang)
 }
 
 function toggleSearch() {
@@ -166,7 +185,7 @@ function handleKeyDown(e: KeyboardEvent) {
   .mobile-search {
     display: block;
   }
-  
+
   .mobile-search-btn {
     background: none;
     border: 1px solid var(--card-border);
