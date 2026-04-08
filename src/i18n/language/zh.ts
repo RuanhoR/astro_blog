@@ -15,4 +15,7 @@ export default {
   searching: "搜索中...",
   aboutContent: "你好，这个博客是我分享技术文章和个人见解的地方。希望你能在这里找到有价值的内容！如有建议，可以通过GitHub或邮箱 a@ruahor.dpdns.org 联系我。",
   aboutTitle: "关于",
+  readingTime: "分钟读出",
+  lastUpdatedOn: "最后更新于",
+  minRead: "分钟读出",
 } as I18n;

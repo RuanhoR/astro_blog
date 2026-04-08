@@ -15,4 +15,7 @@ export default {
   searching: "Searching...",
   aboutContent: "Hello, this blog is a place where I share technical articles and personal insights. I hope you can find valuable content here! If you have any suggestions, feel free to contact me through GitHub or email at a@ruahor.dpdns.org",
   aboutTitle: "About Me",
+  readingTime: "minutes read",
+  lastUpdatedOn: "Last updated on",
+  minRead: "min read",
 } as I18n;

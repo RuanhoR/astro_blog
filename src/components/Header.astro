@@ -3,16 +3,15 @@ import { getCollection } from 'astro:content';
 import { SITE_TITLE } from '../consts';
 import Search from "./Search.vue"
 import MobileSearch from "./MobileSearch.vue"
-import { currentLanguage, getTranslation } from '../i18n/index';
 ---
 
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<a href="/" data-link="home">{getTranslation("Home", currentLanguage)}</a>
-			<a href="/blog" data-link="blog">{getTranslation("Blog", currentLanguage)}</a>
-			<a href="/about" data-link="about">{getTranslation("About", currentLanguage)}</a>
+			<a href="/" data-link="home">Home</a>
+			<a href="/blog" data-link="blog">Blog</a>
+			<a href="/about" data-link="about">About</a>
 		</div>
 		<div class="social-links">
 			<div class="search-container">

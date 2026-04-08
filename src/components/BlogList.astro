@@ -1,16 +1,17 @@
 ---
 import FormattedDate from './FormattedDate.astro';
-import { currentLanguage } from '../i18n';
+import { getCurrentLanguage } from '../i18n';
 import type { getCollection } from 'astro:content';
 import GoImage from "./../assets/go.svg"
 export interface Props {
-  posts: Awaited<ReturnType<typeof getCollection>>;
+  posts: Array<Awaited<ReturnType<typeof getCollection>>[0] & { readingTime?: number }>;
   layout?: 'card' | 'grid';
   showExcerpt?: boolean;
   postsPerPage?: number;
   currentPage?: number;
 }
-
+// 构建时设置默认语言，运行时通过客户端脚本更新
+const defaultLanguage = 'zh';
 const { 
   posts, 
   layout = 'card', 
@@ -36,7 +37,10 @@ if (postsPerPage) {
         </div>
         {post.data.pubDate && (
           <div class="blog-date">
-            <FormattedDate date={post.data.pubDate} locale={currentLanguage} />
+            <FormattedDate date={post.data.pubDate} locale="zh" />
+            {post.readingTime && post.readingTime > 0 && (
+              <span class="reading-time" data-reading-time="{post.readingTime}"> • {post.readingTime} 分钟读出</span>
+            )}
           </div>
         )}
         {showExcerpt && (
@@ -247,4 +251,5 @@ ul a:hover img {
     height: 200px;
   }
 }
+</style>
 </style>

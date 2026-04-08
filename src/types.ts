@@ -16,7 +16,8 @@ export const SearchLanguageKey = [
   "searching"
 ] as const;
 export const AboutLanguageKey = ["aboutTitle", "aboutContent"] as const;
-export type I18nKey = typeof FooterLanguageKey[number] | typeof HomeLanguageKey[number] | typeof HeaderLanuageKey[number] | typeof SearchLanguageKey[number] | typeof AboutLanguageKey[number];
+export const BlogLanguageKey = ["readingTime", "lastUpdatedOn", "minRead"] as const;
+export type I18nKey = typeof FooterLanguageKey[number] | typeof HomeLanguageKey[number] | typeof HeaderLanuageKey[number] | typeof SearchLanguageKey[number] | typeof AboutLanguageKey[number] | typeof BlogLanguageKey[number];
 export type I18n = {
   [key in I18nKey]: string;
 };

@@ -5,12 +5,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { currentLanguage } from '../i18n';
+import { getCurrentLanguage } from '../i18n';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  readingTime?: number;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
-const locale = currentLanguage;
+const { title, description, pubDate, updatedDate, heroImage, readingTime } = Astro.props;
 ---
 
 <html lang="en">
@@ -55,6 +56,66 @@ const locale = currentLanguage;
 				font-style: italic;
 			}
 		</style>
+		<script>
+		(function() {
+		  const translationKeys = {
+		    lastUpdatedOn: 'lastUpdatedOn',
+		    readingTime: 'readingTime', 
+		    minRead: 'minRead'
+		  };
+		  
+		  const translations = {
+		    zh: {
+		      [translationKeys.readingTime]: "分钟读出",
+		      [translationKeys.lastUpdatedOn]: "最后更新于",
+		      [translationKeys.minRead]: "分钟读出"
+		    },
+		    en: {
+		      [translationKeys.readingTime]: "minutes read", 
+		      [translationKeys.lastUpdatedOn]: "Last updated on",
+		      [translationKeys.minRead]: "min read"
+		    }
+		  };
+		
+		  // 等待页面加载完成
+		  if (document.readyState === 'loading') {
+		    document.addEventListener('DOMContentLoaded', updateLocaleElements);
+		  } else {
+		    updateLocaleElements();
+		  }
+
+		  // 监听语言切换事件
+		  window.addEventListener('languagechange', updateLocaleElements);
+
+		  function updateLocaleElements() {
+		    const currentLang = getCurrentLanguage();
+		    const langTranslations = translations[currentLang] || translations.zh;
+		    
+		    // 更新阅读时间显示 - 直接使用已知属性
+		    const readingTimeElements = document.querySelectorAll('.reading-time');
+		    readingTimeElements.forEach(element => {
+		      const readingTime = element.getAttribute('data-reading-time');
+		      if (readingTime && langTranslations[translationKeys.minRead]) {
+		        element.textContent = ` • ${readingTime} ${langTranslations[translationKeys.minRead]}`;
+		      }
+		    });
+
+		    // 更新"最后更新于"文本 - 类型安全的方式
+		    const translationSpans = document.querySelectorAll('[data-translation-key]');
+		    translationSpans.forEach(element => {
+		      const key = element.getAttribute('data-translation-key');
+		      if (key === translationKeys.lastUpdatedOn && langTranslations[translationKeys.lastUpdatedOn]) {
+		        element.textContent = langTranslations[translationKeys.lastUpdatedOn];
+		      }
+		    });
+		  }
+
+		  function getCurrentLanguage() {
+		    const browserLang = (navigator.language || navigator.languages[0] || 'zh');
+		    return browserLang.startsWith('zh') ? 'zh' : 'en';
+		  }
+		})();
+		</script>
 	</head>
 
 	<body>
@@ -67,11 +128,14 @@ const locale = currentLanguage;
 				<div class="prose">
 					<div class="title">
 							<div class="date">
-								<FormattedDate date={pubDate} locale={locale} />
+								<FormattedDate date={pubDate} locale="zh" />
+								{readingTime && readingTime > 0 && (
+									<span class="reading-time" data-reading-time={readingTime}> • {readingTime}</span>
+								)}
 								{
 									updatedDate && (
 										<div class="last-updated-on">
-											{locale === 'zh' ? '最后更新于' : 'Last updated on'} <FormattedDate date={updatedDate} locale={locale} />
+											<span data-translation-key="lastUpdatedOn" data-fallback-text="Update At "></span> <FormattedDate date={updatedDate} locale="zh" />
 										</div>
 									)
 								}

@@ -7,25 +7,23 @@ export const LanguageI18n = {
   en: en as I18n,
 } as { [key in Language]: I18n };
 
-let defaultLanguage: Language = "zh";
-export {
-  defaultLanguage as currentLanguage,
+// Client-side language detection
+export function getCurrentLanguage(): Language {
+  if (typeof window === 'undefined') {
+    return 'zh'; // Default for SSR
+  }
+  const browserLang = (navigator.language || navigator.languages[0] || 'zh').slice(0, 2) as Language;
+  return browserLang in LanguageI18n ? browserLang : 'zh';
+}
+let defaultLanguage;
+export function getTranslation(key: I18nKey, lang?: Language): string {
+  const currentLang = lang || getCurrentLanguage();
+  return LanguageI18n[currentLang][key];
 }
 
-export function getTranslation(key: I18nKey, lang: Language = defaultLanguage): string {
-  // Handle server-side rendering
-  if (typeof window === 'undefined') {
-    return LanguageI18n[lang][key];
-  }
-
-  // Client-side language detection
-  const _c = navigator.language || navigator.languages[0] || defaultLanguage;
-  const browserLang = _c.slice(0, 2) as Language; // Extract language code (e.g., 'en' from 'en-US')
-
-  if (browserLang in LanguageI18n) {
-    lang = browserLang;
-  }
-  return LanguageI18n[lang][key];
+export function getTranslations(lang?: Language): I18n {
+  const currentLang = lang || getCurrentLanguage();
+  return LanguageI18n[currentLang];
 }
 export function setLanguageForSSG(lang: Language) {
   defaultLanguage = lang;

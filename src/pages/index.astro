@@ -11,10 +11,27 @@ const postsPerPage = 5;
 const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// Calculate word count and reading time at build time
 const allData = {
-	arliceCout: allPosts.length,
-	textCout: allPosts.reduce((sum, post) => sum + (post.body?.length || 0), 0)
+	articleCount: allPosts.length,
+	textCount: allPosts.reduce((sum, post) => {
+		const content = post.body || '';
+		const wordCount = content.replace(/[^\w\s]/g, '').split(/\s+/).filter(word => word.length > 0).length;
+		return sum + wordCount;
+	}, 0)
 }
+
+const allPostsWithReadingTime = allPosts.map(post => {
+	const content = post.body || '';
+	const wordCount = content.replace(/[^\w\s]/g, '').split(/\s+/).filter(word => word.length > 0).length;
+	const readingTime = Math.floor(wordCount / 240); // 240 words per minute
+	return {
+		...post,
+		readingTime
+	};
+});
+
 const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 ---
 
@@ -34,15 +51,22 @@ const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 					</div>
 					<div id="textCountDisplay"></div>
 					<div id="articleCountDisplay"></div>
+					<div id="readingTimeDisplay"></div>
 				</div>
+				<script type="application/json" data-stats>
+				{
+				  "textCount": ${allData.textCount},
+				  "articleCount": ${allData.articleCount}
+				}
+				</script>
 				<div class="posts-container">
-					<BlogList 
-						posts={allPosts}
-						layout="card"
-						showExcerpt={true}
-						postsPerPage={postsPerPage}
-						currentPage={currentPage}
-					/>
+				<BlogList 
+					posts={allPostsWithReadingTime}
+					layout="card"
+					showExcerpt={true}
+					postsPerPage={postsPerPage}
+					currentPage={currentPage}
+				/>
 					
 					{allPosts.length > postsPerPage && (
 						<Pagination 
@@ -61,8 +85,9 @@ const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 		function updateStatistics() {
 			const textCountElem = document.getElementById('textCountDisplay');
 			const articleCountElem = document.getElementById('articleCountDisplay');
+			const readingTimeElem = document.getElementById('readingTimeDisplay');
 			
-			if (!textCountElem || !articleCountElem) return;
+			if (!textCountElem || !articleCountElem || !readingTimeElem) return;
 			
 			// 检测当前语言
 			const getCurrentLanguage = () => {
@@ -72,15 +97,28 @@ const currentPage = Number(Astro.url.searchParams.get('page')) || 1;
 			
 			const lang = getCurrentLanguage();
 			const translations = {
-				AllTextCout: { zh: '总字数', en: 'Total text count' },
-				AllAlircleCout: { zh: '总文章数', en: 'Total articles' }
+				textCount: { zh: '总字数', en: 'Total text count' },
+				articleCount: { zh: '总文章数', en: 'Total articles' },
+				averageReadingTime: { zh: '平均阅读时间', en: 'Average reading time' }
 			};
 			
-			const textCountData = translations.AllTextCout[lang] + ": " + {textCout: allData.textCout}.textCout;
-			const articleCountData = translations.AllAlircleCout[lang] + ": " + {arliceCout: allData.arliceCout}.arliceCout;
-			
-			textCountElem.textContent = textCountData;
-			articleCountElem.textContent = articleCountData;
+			// 从data属性获取统计信息
+			const dataScript = document.querySelector('script[type="application/json"][data-stats]');
+			if (dataScript) {
+				try {
+					const data = JSON.parse(dataScript.textContent);
+					const averageReadingTime = Math.floor(data.textCount / data.articleCount / 240);
+					const textCountData = `${translations.textCount[lang]}: ${data.textCount.toLocaleString()}`;
+					const articleCountData = `${translations.articleCount[lang]}: ${data.articleCount}`;
+					const readingTimeData = `${translations.averageReadingTime[lang]}: ${averageReadingTime} ${lang === 'zh' ? '分钟' : 'minutes'}`;
+					
+					textCountElem.textContent = textCountData;
+					articleCountElem.textContent = articleCountData;
+					readingTimeElem.textContent = readingTimeData;
+				} catch (error) {
+					console.error('Failed to parse statistics data:', error);
+				}
+			}
 		}
 		
 		// 页面加载时更新
