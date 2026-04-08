@@ -12,3 +12,7 @@ heroImage: /favicon.ico
 ## 建议投放处
 
 如果有建议，可以发到 a@ruanhor.dpdns.org
+
+## 数据统计
+
+[Umami](https://cloud.umami.is/share/bLgoM7m3Vg8yzksH)
