@@ -5,7 +5,7 @@ description: 博客网站的启航
 heroImage: /favicon.ico
 ---
 
-# 这个博客
+## 这个博客
 
 基于Astro构建，以后会放一些杂谈、分享
 
