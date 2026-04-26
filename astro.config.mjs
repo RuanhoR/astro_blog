@@ -29,6 +29,9 @@ export default defineConfig({
 	site: "https://fuwari.vercel.app/",
 	base: "/",
 	trailingSlash: "always",
+	server: {
+		port: 1309
+	},
 	integrations: [
 		tailwind({
 			nesting: true,
@@ -99,7 +102,7 @@ export default defineConfig({
 				showCopyToClipboardButton: false,
 			}
 		}),
-        svelte(),
+		svelte(),
 		sitemap(),
 	],
 	markdown: {

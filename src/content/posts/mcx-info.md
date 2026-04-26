@@ -2,7 +2,7 @@
 title: 我的dsl - mcx
 published: 2026-04-25T16:11:12.030Z
 tags: ["介绍", "MCX"]
-category: mcx
+category: MCX
 ---
 # 什么是 MCX
 mcx 是用于构建 mcbe addon的一种dsl，我写了它的ast,IR,transform啥的
