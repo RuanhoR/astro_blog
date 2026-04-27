@@ -1,16 +1,14 @@
 ---
 title: MCX TSC 实现了
-published: 2026-04-26
+published: 2026-04-26T00:00:00.000Z
 description: '众所周知，typescript原生不支持直接添加新的扩展处理器，那么要添加dsl又要怎么做呢'
-tags: ["Typescript", "Volar"]
-category: 'MCX'
-draft: false 
-lang: 'zh'
+tags: ["Volar", "Typescript"]
+category: MCX
 ---
 ## 演示
 OK啊，经过少部分源码阅读和codex交流，初步写出了mcx-tsc
-![tsc demo](./img/04a4e3210bc2288eda649ff0d43eace9.png)
 就是这么个效果，能精准识别类型和映射行号，相当强了。  
+![img](./img/04a4e3210bc2288eda649ff0d43eace9.png)
 ## 使用
 MCX DSL还在开发，现在用...不乏有问题的，用的话先clone仓库
 [mcx-template - mcx template](https://github.com/RuanhoR/mcx-template)  
