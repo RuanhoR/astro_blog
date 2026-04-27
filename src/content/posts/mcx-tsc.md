@@ -1,5 +1,5 @@
 ---
-title: MCX TSC 实现了
+title: MCX TSC 的实现
 published: 2026-04-26T00:00:00.000Z
 description: '众所周知，typescript原生不支持直接添加新的扩展处理器，那么要添加dsl又要怎么做呢'
 tags: ["Volar", "Typescript"]

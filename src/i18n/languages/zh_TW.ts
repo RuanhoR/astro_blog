@@ -12,7 +12,7 @@ export const zh_TW: Translation = {
 	[Key.recentPosts]: "最新文章",
 
 	[Key.comments]: "評論",
-
+	[Key.tool]: "工具",
 	[Key.untitled]: "無標題",
 	[Key.uncategorized]: "未分類",
 	[Key.noTags]: "無標籤",

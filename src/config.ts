@@ -16,14 +16,12 @@ export const siteConfig: SiteConfig = {
 		fixed: false, // Hide the theme color picker for visitors
 	},
 	banner: {
-		enable: true,
-		src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
+		enable: false,
 		credit: {
-			enable: false, // Display the credit text of the banner image
-			text: "", // Credit text to be displayed
-			url: "", // (Optional) URL link to the original artwork or artist's page
+			enable: false,
+			text: ""
 		},
+		src: "/assets/images/banner.jpg", // Path of the banner image, relative to the /public directory
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
@@ -55,7 +53,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Ruanhor",
-	bio: "一个简单的生物，写过DSL、AST、Vscode 扩展等", // A short bio or description about yourself to be displayed in the sidebar
+	bio: "一个中学生，写过DSL、AST、Vscode 扩展等", // A short bio or description about yourself to be displayed in the sidebar
 	links: [
 		{
 			name: "Bilibili",
@@ -77,7 +75,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "QQ",
 			icon: "fa6-brands:qq",
-			url: "https://"
+			url: "https://3915264929.qzone.qq.com/"
 			// Note: The QQ link format may not work on all devices or browsers, and may require the user to have QQ installed and properly configured. Please test it on your target audience's common platforms to ensure it works as expected.
 		}
 	],

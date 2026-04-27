@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/",
+    "baseUrl": "./",
     "strictNullChecks": true,
     "allowJs": false,
     "declaration": true,
@@ -31,7 +31,7 @@
       ],
       "@/*": [
         "src/*"
-      ]
+      ],
     }
   },
   "include": [
