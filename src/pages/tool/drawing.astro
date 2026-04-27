@@ -1,0 +1,68 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import DrawingCanvas from "../../components/drawing/DrawingCanvas.svelte";
+import ColorPicker from "../../components/drawing/ColorPicker.svelte";
+import BrushSelector from "../../components/drawing/BrushSelector.svelte";
+import ShapeSelector from "../../components/drawing/ShapeSelector.svelte";
+import ImageImporter from "../../components/drawing/ImageImporter.svelte";
+import { i18n } from "../../i18n/translation";
+import Key from "../../i18n/i18nKey";
+---
+
+<MainGridLayout>
+  <div class="tool-container">
+    <h1>{i18n(Key.drawingTool)}</h1>
+    <div class="drawing-app">
+      <div class="toolbar">
+        <ColorPicker selectedColor="#000000" client:only />
+        <BrushSelector selectedBrush="pen" client:only />
+        <ShapeSelector selectedShape="free" client:only />
+        <ImageImporter client:only />
+      </div>
+      <DrawingCanvas width={800} height={600} backgroundColor="#ffffff" client:only />
+    </div>
+  </div>
+</MainGridLayout>
+
+<style>
+  .tool-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .drawing-app {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .drawing-app {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+  }
+  @media (max-width: 768px) {
+    .toolbar {
+      flex-direction: column;
+    }
+  }
+</style>

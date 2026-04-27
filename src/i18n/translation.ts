@@ -12,7 +12,7 @@ import { zh_CN } from "./languages/zh_CN";
 import { zh_TW } from "./languages/zh_TW";
 
 export type Translation = {
-	[K in I18nKey]: string;
+	[K in I18nKey]?: string;
 };
 
 const defaultTranslation = en;
@@ -39,10 +39,11 @@ const map: { [key: string]: Translation } = {
 };
 
 export function getTranslation(lang: string): Translation {
-	return map[lang.toLowerCase()] || defaultTranslation;
+	const base = map[lang.toLowerCase()] || {};
+	return { ...defaultTranslation, ...base };
 }
 
 export function i18n(key: I18nKey): string {
 	const lang = siteConfig.lang || "en";
-	return getTranslation(lang)[key];
+	return getTranslation(lang)[key] || defaultTranslation[key] || key;
 }

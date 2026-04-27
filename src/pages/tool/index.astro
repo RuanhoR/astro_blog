@@ -1,0 +1,51 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { i18n } from "../../i18n/translation";
+import Key from "../../i18n/i18nKey";
+---
+
+<MainGridLayout>
+  <div class="tool-container">
+    <h1>{i18n(Key.tool)}</h1>
+    <div class="tool-list">
+      <a href="/tool/drawing" class="tool-link">
+        <h2>{i18n(Key.drawingTool)}</h2>
+        <p>Draw with SVG canvas, shapes, and colors</p>
+      </a>
+      <a href="/tool/nat" class="tool-link">
+        <h2>{i18n(Key.natDetection)}</h2>
+        <p>Detect NAT type using WebRTC</p>
+      </a>
+    </div>
+  </div>
+</MainGridLayout>
+
+<style>
+  .tool-container {
+    padding: 2rem;
+  }
+  .tool-list {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .tool-link {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s;
+  }
+  .tool-link:hover {
+    border-color: #007acc;
+  }
+  .tool-link h2 {
+    margin: 0 0 0.5rem 0;
+  }
+  .tool-link p {
+    margin: 0;
+    color: #666;
+  }
+</style>

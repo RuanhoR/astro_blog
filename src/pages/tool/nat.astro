@@ -1,0 +1,26 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import NATDetector from "../../components/drawing/NATDetector.svelte";
+import { i18n } from "../../i18n/translation";
+import Key from "../../i18n/i18nKey";
+---
+
+<MainGridLayout>
+  <div class="tool-container">
+    <h1>{i18n(Key.natDetection)}</h1>
+    <div class="nat-app">
+      <p>This tool detects your NAT type using WebRTC technology.</p>
+      <NATDetector client:load />
+    </div>
+  </div>
+</MainGridLayout>
+
+<style>
+  .tool-container {
+    padding: 2rem;
+  }
+  .nat-app {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+</style>

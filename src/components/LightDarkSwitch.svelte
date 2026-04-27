@@ -48,11 +48,13 @@ function toggleScheme() {
 
 function showPanel() {
 	const panel = document.querySelector("#light-dark-panel");
+    if (!panel) return;
 	panel.classList.remove("float-panel-closed");
 }
 
 function hidePanel() {
 	const panel = document.querySelector("#light-dark-panel");
+    if (!panel) return;
 	panel.classList.add("float-panel-closed");
 }
 </script>

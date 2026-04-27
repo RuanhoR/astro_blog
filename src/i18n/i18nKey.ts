@@ -33,6 +33,20 @@ enum I18nKey {
 	publishedAt = "publishedAt",
 	license = "license",
 	tool = "tool",
+
+	// Drawing tool keys
+	drawingTool = "drawingTool",
+	brush = "brush",
+	colorPicker = "colorPicker",
+	shape = "shape",
+	imageImport = "imageImport",
+	brushType = "brushType",
+	fringe = "fringe",
+	backgroundColor = "backgroundColor",
+	foregroundColor = "foregroundColor",
+	natDetection = "natDetection",
+	clearCanvas = "clearCanvas",
+	saveImage = "saveImage",
 }
 
 export default I18nKey;

@@ -34,5 +34,18 @@ export const zh_CN: Translation = {
 
 	[Key.author]: "作者",
 	[Key.publishedAt]: "发布于",
-	[Key.license]: "许可协议",
+	[Key.license]: "许可证",
+
+	[Key.drawingTool]: "绘图工具",
+	[Key.brush]: "画笔",
+	[Key.colorPicker]: "颜色选择器",
+	[Key.shape]: "形状",
+	[Key.imageImport]: "导入图像",
+	[Key.brushType]: "笔刷类型",
+	[Key.fringe]: "边缘",
+	[Key.backgroundColor]: "背景色",
+	[Key.foregroundColor]: "前景色",
+	[Key.natDetection]: "NAT检测",
+	[Key.clearCanvas]: "清空画布",
+	[Key.saveImage]: "保存图像",
 };

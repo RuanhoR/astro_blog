@@ -35,4 +35,17 @@ export const en: Translation = {
 	[Key.author]: "Author",
 	[Key.publishedAt]: "Published at",
 	[Key.license]: "License",
+
+	[Key.drawingTool]: "Drawing Tool",
+	[Key.brush]: "Brush",
+	[Key.colorPicker]: "Color Picker",
+	[Key.shape]: "Shape",
+	[Key.imageImport]: "Import Image",
+	[Key.brushType]: "Brush Type",
+	[Key.fringe]: "Fringe",
+	[Key.backgroundColor]: "Background Color",
+	[Key.foregroundColor]: "Foreground Color",
+	[Key.natDetection]: "NAT Detection",
+	[Key.clearCanvas]: "Clear Canvas",
+	[Key.saveImage]: "Save Image",
 };
