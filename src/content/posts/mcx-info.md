@@ -1,11 +1,12 @@
 ---
 title: 我的dsl - mcx
 published: 2026-04-25T16:11:12.030Z
+description: DSL向来难写，不若看看我这款
 tags: ["介绍", "MCX"]
 category: MCX
 ---
 # 什么是 MCX
-mcx 是用于构建 mcbe addon的一种dsl，我写了它的ast,IR,transform啥的
+mcx 是用于构建 mcbe addon的一种dsl，我写了它。
 # 那么如何使用
 到 [Mbler docs](https://mbler-docs.ruanhor.dpdns.org) 即可阅读文档
 ---
