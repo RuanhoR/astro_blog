@@ -57,8 +57,8 @@ const mainPanelTop = siteConfig.banner.enable
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
     </ImageWrapper>
-</div>}
 
+</div>}
 <!-- Main content -->
 <div class="absolute w-full z-30 pointer-events-none" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
@@ -117,7 +117,6 @@ const mainPanelTop = siteConfig.banner.enable
                 </div>
             </div>
         </div>}
-
         <!-- #toc needs to exist for Swup to work normally -->
         {!siteConfig.toc.enable && <div id="toc"></div>}
     </div>

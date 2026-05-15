@@ -1,3 +1,4 @@
+// @ts-check
 /* This is a script to create a new post markdown file with front-matter */
 
 import fs from "fs"
@@ -39,7 +40,7 @@ if (fs.existsSync(fullPath)) {
 // recursive mode creates multi-level directories
 const dirPath = path.dirname(fullPath)
 if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true })
+  fs.mkdirSync(dirPath, { recursive: true })
 }
 
 const content = `---

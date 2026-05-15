@@ -18,5 +18,24 @@ const className = Astro.props.class;
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+        <div>
+            <input id="subscribe-inputer" type="email" name="email" style="background-color: #000; color: #fff;" />
+            <button id="subscribe-button">Subscribe</button>
+            <div id="subscribe-tip"></div>
+        </div>
     </div>
 </div>
+<script>
+
+const inp = document.getElementById("subscribe-inputer") as HTMLInputElement;
+const btn = document.getElementById("subscribe-button") as HTMLButtonElement;
+const tip = document.getElementById("subscribe-tip") as HTMLDivElement
+btn?.addEventListener("click", async () => {
+    const request = await fetch(`https://a.p.z.ruanhor.dpdns.org/blog/hook/subscribe/${inp.value}/run`, {
+        method: "POST"
+    })
+    const json = await request.json();
+    if (json.code !== 200) tip.textContent = json.data;
+    else tip.textContent = "Success"
+})
+</script>
