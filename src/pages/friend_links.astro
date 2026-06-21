@@ -35,6 +35,17 @@ import friendLinks from '../content/spec/friend-links.json'
             </a>
           ))
         }
+        {
+          friendLinks.length == 0 ? (
+            <div>
+              暂无友链...去
+              <a href="https://github.com/RuanhoR/astro_blog/tree/master/src/content/spec/friend-links.json">
+                Github 文件
+              </a>
+              提交 pr 来添加
+            </div>
+          ) : null
+        }
       </div>
     </div>
   </div>
