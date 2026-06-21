@@ -13,7 +13,9 @@ import friendLinks from '../content/spec/friend-links.json'
     class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
   >
     <div class="card-base z-10 px-9 py-6 relative w-full">
-      <h2 class="text-2xl font-bold mb-6">{i18n(I18nKey.friendLinks)}</h2>
+      <h2 class="text-2xl font-bold mb-6 text-90">
+        {i18n(I18nKey.friendLinks)}
+      </h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {
           friendLinks.map(link => (
@@ -35,17 +37,15 @@ import friendLinks from '../content/spec/friend-links.json'
             </a>
           ))
         }
-        {
-          friendLinks.length == 0 ? (
-            <div>
-              暂无友链...去
-              <a href="https://github.com/RuanhoR/astro_blog/tree/master/src/content/spec/friend-links.json">
-                Github 文件
-              </a>
-              提交 pr 来添加
-            </div>
-          ) : null
-        }
+        {friendLinks.length == 0 ? <div>暂无友链...</div> : null}
+      </div>
+      <div>
+        <a
+          class="text-30"
+          href="https://github.com/RuanhoR/astro_blog/tree/master/src/content/spec/friend-links.json"
+          >Github</a
+        >
+        <span class="text-30 font-bold mb-6">提交 pr 来添加</span>
       </div>
     </div>
   </div>
