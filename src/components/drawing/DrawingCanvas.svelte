@@ -4,7 +4,6 @@
 
 	export let width = 800;
 	export let height = 600;
-	export let backgroundColor = '#ffffff';
 
 	let svgElement;
 	let isDrawing = false;
@@ -14,6 +13,10 @@
 	let currentColor = '#000000';
 	let startX = 0, startY = 0;
 	let currentX = 0, currentY = 0;
+
+	function getCanvasBg() {
+		return document.documentElement.classList.contains('dark') ? '#1a1a2e' : '#ffffff';
+	}
 
 	// Listen for events
 	window.addEventListener('colorChange', (e) => {
@@ -42,7 +45,7 @@
 
 		if (currentShape === 'free') {
 			currentPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-			currentPath.setAttribute('stroke', currentBrush === 'eraser' ? backgroundColor : currentColor);
+			currentPath.setAttribute('stroke', currentBrush === 'eraser' ? getCanvasBg() : currentColor);
 			currentPath.setAttribute('stroke-width', currentBrush === 'marker' ? '5' : '2');
 			currentPath.setAttribute('fill', 'none');
 			currentPath.setAttribute('d', `M ${startX} ${startY}`);
@@ -163,7 +166,7 @@
 </script>
 
 <div class="drawing-canvas">
-	<svg bind:this={svgElement} {width} {height} style="background: {backgroundColor};" role="application" aria-label="Drawing canvas"
+	<svg bind:this={svgElement} {width} {height} class="canvas-svg" role="application" aria-label="Drawing canvas"
 		on:mousedown={handleMouseDown}
 		on:mousemove={handleMouseMove}
 		on:mouseup={stopDrawing}
@@ -187,18 +190,27 @@
 		align-items: center;
 		gap: 1rem;
 	}
+	.canvas-svg {
+		background: #ffffff;
+		border: 1px solid var(--btn-regular-bg);
+		border-radius: var(--radius-large);
+	}
+	:global(html.dark) .canvas-svg {
+		background: #1a1a2e;
+	}
 	.controls {
 		display: flex;
 		gap: 1rem;
 	}
 	button {
 		padding: 0.5rem 1rem;
-		background: #007acc;
-		color: white;
+		background: var(--btn-regular-bg);
+		color: var(--btn-content);
 		border: none;
 		cursor: pointer;
+		border-radius: var(--radius-large);
 	}
 	button:hover {
-		background: #005a99;
+		background: var(--btn-regular-bg-hover);
 	}
 </style>

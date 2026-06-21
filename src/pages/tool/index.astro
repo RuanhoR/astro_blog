@@ -1,51 +1,39 @@
 ---
-import MainGridLayout from "../../layouts/MainGridLayout.astro";
-import { i18n } from "../../i18n/translation";
-import Key from "../../i18n/i18nKey";
+import MainGridLayout from '../../layouts/MainGridLayout.astro'
+import { i18n } from '../../i18n/translation'
+import Key from '../../i18n/i18nKey'
 ---
 
-<MainGridLayout>
-  <div class="tool-container">
-    <h1>{i18n(Key.tool)}</h1>
-    <div class="tool-list">
-      <a href="/tool/drawing" class="tool-link">
-        <p>{i18n(Key.drawingTool)}</p>
-        <p>Draw with SVG canvas, shapes, and colors</p>
-      </a>
-      <a href="/tool/nat" class="tool-link">
-        <p>{i18n(Key.natDetection)}</p>
-        <p>Detect NAT type using WebRTC</p>
-      </a>
+<MainGridLayout title={i18n(Key.tool)} description={i18n(Key.tool)}>
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+      <h1 class="text-2xl font-bold mb-6 text-90">{i18n(Key.tool)}</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="/tool/drawing" class="tool-link">
+          <p class="font-bold text-90">{i18n(Key.drawingTool)}</p>
+          <p class="text-50">{i18n(Key.brush)} · {i18n(Key.colorPicker)} · {i18n(Key.shape)}</p>
+        </a>
+      </div>
     </div>
   </div>
 </MainGridLayout>
 
 <style>
-  .tool-container {
-    padding: 2rem;
-  }
-  .tool-list {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
   .tool-link {
     display: block;
     padding: 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: 0.5rem;
+    border: 1px solid var(--btn-regular-bg);
+    border-radius: var(--radius-large);
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
   }
   .tool-link:hover {
-    border-color: #007acc;
-  }
-  .tool-link h2 {
-    margin: 0 0 0.5rem 0;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   .tool-link p {
     margin: 0;
-    color: #666;
   }
 </style>

@@ -26,4 +26,13 @@
 		flex-direction: column;
 		gap: 0.5rem;
 	}
+	label {
+		font-weight: bold;
+		color: var(--btn-content);
+		font-size: 0.9rem;
+	}
+	input[type="file"] {
+		color: var(--btn-content);
+		font-size: 0.85rem;
+	}
 </style>

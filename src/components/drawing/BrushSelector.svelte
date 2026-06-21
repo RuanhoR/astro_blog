@@ -35,7 +35,7 @@
 	}
 	label {
 		font-weight: bold;
-		color: #333;
+		color: var(--btn-content);
 		font-size: 0.9rem;
 	}
 	.brushes {
@@ -44,20 +44,21 @@
 	}
 	.brush-btn {
 		padding: 0.5rem 1rem;
-		border: 2px solid #ccc;
-		background: white;
+		border: 2px solid var(--btn-regular-bg);
+		background: var(--card-bg);
+		color: var(--btn-content);
 		cursor: pointer;
 		border-radius: 4px;
 		font-size: 0.9rem;
 		transition: all 0.2s;
 	}
 	.brush-btn:hover {
-		border-color: #007acc;
-		background: #f0f8ff;
+		border-color: var(--primary);
+		background: var(--btn-plain-bg-hover);
 	}
 	.brush-btn.active {
-		background: #007acc;
+		background: var(--primary);
 		color: white;
-		border-color: #007acc;
+		border-color: var(--primary);
 	}
 </style>

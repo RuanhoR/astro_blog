@@ -24,17 +24,18 @@
 	}
 	label {
 		font-weight: bold;
-		color: #333;
+		color: var(--btn-content);
 		font-size: 0.9rem;
 	}
 	input[type="color"] {
 		width: 50px;
 		height: 50px;
-		border: 2px solid #ccc;
+		border: 2px solid var(--btn-regular-bg);
 		border-radius: 4px;
 		cursor: pointer;
+		background: var(--card-bg);
 	}
 	input[type="color"]:hover {
-		border-color: #007acc;
+		border-color: var(--primary);
 	}
 </style>

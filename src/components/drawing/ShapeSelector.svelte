@@ -38,12 +38,13 @@
 	}
 	.shape-btn {
 		padding: 0.5rem;
-		border: 1px solid #ccc;
-		background: white;
+		border: 1px solid var(--btn-regular-bg);
+		background: var(--card-bg);
+		color: var(--btn-content);
 		cursor: pointer;
 	}
 	.shape-btn.active {
-		background: #007acc;
+		background: var(--primary);
 		color: white;
 	}
 </style>
