@@ -48,6 +48,7 @@ enum I18nKey {
   clearCanvas = 'clearCanvas',
   saveImage = 'saveImage',
   friendLinks = 'friendLinks',
+  stats = 'stats',
 }
 
 export default I18nKey

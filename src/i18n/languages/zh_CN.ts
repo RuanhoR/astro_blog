@@ -49,4 +49,5 @@ export const zh_CN = {
   [Key.clearCanvas]: '清空画布',
   [Key.saveImage]: '保存图像',
   [Key.friendLinks]: '友链',
+  [Key.stats]: '网站统计',
 }

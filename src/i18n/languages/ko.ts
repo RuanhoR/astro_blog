@@ -49,4 +49,5 @@ export const ko = {
   [Key.clearCanvas]: '캔버스 지우기',
   [Key.saveImage]: '이미지 저장',
   [Key.friendLinks]: '친구 링크',
+  [Key.stats]: '사이트 통계',
 }

@@ -49,4 +49,5 @@ export const zh_TW = {
   [Key.clearCanvas]: '清空畫布',
   [Key.saveImage]: '儲存圖像',
   [Key.friendLinks]: '友連結',
+  [Key.stats]: '網站統計',
 }

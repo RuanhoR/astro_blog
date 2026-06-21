@@ -49,4 +49,5 @@ export const ja = {
   [Key.clearCanvas]: 'キャンバスをクリア',
   [Key.saveImage]: '画像を保存',
   [Key.friendLinks]: '友達リンク',
+  [Key.stats]: 'サイト統計',
 }

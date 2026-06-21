@@ -49,4 +49,5 @@ export const id = {
   [Key.clearCanvas]: 'Hapus Kanvas',
   [Key.saveImage]: 'Simpan Gambar',
   [Key.friendLinks]: 'Tautan Teman',
+  [Key.stats]: 'Statistik',
 }

@@ -49,4 +49,5 @@ export const th = {
   [Key.clearCanvas]: 'ล้างผ้าใบ',
   [Key.saveImage]: 'บันทึกรูปภาพ',
   [Key.friendLinks]: 'ลิงก์เพื่อน',
+  [Key.stats]: 'สถิติเว็บ',
 }

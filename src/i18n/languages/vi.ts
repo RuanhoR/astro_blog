@@ -49,4 +49,5 @@ export const vi = {
   [Key.clearCanvas]: 'Xóa bảng vẽ',
   [Key.saveImage]: 'Lưu hình ảnh',
   [Key.friendLinks]: 'Liên kết bạn bè',
+  [Key.stats]: 'Thống kê',
 }

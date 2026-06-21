@@ -49,4 +49,5 @@ export const es = {
   [Key.clearCanvas]: 'Limpiar lienzo',
   [Key.saveImage]: 'Guardar imagen',
   [Key.friendLinks]: 'Amigos',
+  [Key.stats]: 'Estadísticas',
 }

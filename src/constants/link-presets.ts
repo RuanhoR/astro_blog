@@ -19,8 +19,13 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
     name: i18n(I18nKey.tool),
     url: '/tool',
   },
-  [LinkPreset.FriendLink]: {
-    name: i18n(I18nKey.friendLinks),
-    url: '/friend_links',
-  },
+	[LinkPreset.FriendLink]: {
+		name: i18n(I18nKey.friendLinks),
+		url: '/friend_links',
+	},
+	[LinkPreset.Stats]: {
+		name: i18n(I18nKey.stats),
+		url: 'https://cloud.umami.is/share/LXjNxtXmHncKseWs',
+		external: true,
+	},
 }

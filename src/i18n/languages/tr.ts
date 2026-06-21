@@ -49,4 +49,5 @@ export const tr = {
   [Key.clearCanvas]: 'Tuvali Temizle',
   [Key.saveImage]: 'Görseli Kaydet',
   [Key.friendLinks]: 'Arkadaş Bağlantıları',
+  [Key.stats]: 'İstatistikler',
 }
