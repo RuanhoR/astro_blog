@@ -4,5 +4,11 @@
     "desc": "aaaa懒得写",
     "avatar": "https://a.p.z.ruanhor.dpdns.org/user/picture/public/2",
     "url": "https://srmz.cn"
+  },
+  {
+    "name": "本网站主站",
+    "avatar": "https://ruanhor.dpdns.org/icon.svg",
+    "url": "https://ruanhor.dpdns.org",
+    "desc": "一个集合了文章、短链、账号的网站"
   }
 ]
