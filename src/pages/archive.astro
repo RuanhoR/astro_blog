@@ -9,6 +9,9 @@ const sortedPostsList = await getSortedPostsList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)}>
-    <ArchivePanel sortedPosts={sortedPostsList} tags={[]} categories={[]} client:only="svelte"></ArchivePanel>
+    <div class="card-base z-10 px-9 py-6 relative w-full">
+        <h1 class="text-2xl font-bold mb-6 text-90">{i18n(I18nKey.archive)}</h1>
+        <ArchivePanel sortedPosts={sortedPostsList} tags={[]} categories={[]} client:only="svelte"></ArchivePanel>
+    </div>
 </MainGridLayout>
 
